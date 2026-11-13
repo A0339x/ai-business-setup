@@ -1,0 +1,16 @@
+# Secrets never belong in this repo. The kit keeps them in ~/.config/warmbly-kit/
+# on the Mac and on the server. These patterns are a second line of defense.
+*token*
+*.csv
+*.key
+*.pem
+*_ed25519
+*_ed25519.pub
+*.dump
+keys-backup*
+warmbly-keys-backup*
+state.json
+.env
+.env.*
+*.log
+.DS_Store
