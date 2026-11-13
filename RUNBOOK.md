@@ -253,7 +253,7 @@ It checks all seven names on two public DNS servers, every 30 seconds for up to 
 
 **Goal:** all Warmbly containers healthy, `https://app.<host>` loads with a valid certificate, and the two unrecoverable keys backed up in two places.
 
-The kit pins the release in `kit.conf` (`WARMBLY_VERSION`, now `v0.8.4`) and the installer's checksum (`WARMBLY_INSTALLER_SHA256`).
+The kit pins the release in `kit.conf` (`WARMBLY_VERSION`, now `v0.8.3`, the release this setup was proven on) and the installer's checksum (`WARMBLY_INSTALLER_SHA256`).
 
 ### Steps
 
