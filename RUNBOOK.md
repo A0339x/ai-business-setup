@@ -26,12 +26,13 @@ Throughout:
 1. Run `bash scripts/state.sh next`. If it prints a number above 0, read that phase and resume there.
 
 2. Find a browser tool, in this order:
-   1. **Claude in Chrome.** Look for tools named `mcp__claude-in-chrome__*`. If you only see their names as deferred tools, load them with ToolSearch (query `claude-in-chrome`). If a `chrome-browser` skill is listed, read it first. Open new tabs; do not take over the person's existing tabs.
-   2. **Another browser tool,** such as `mcp__playwright__*` or a built-in browser tool.
-   3. **gstack browse:** check `test -x ~/.claude/skills/gstack/browse/dist/browse`. Use it with `--headed` so the person can see and use the window. Start it in the background and keep it running; it closes when the command that started it ends.
-   4. **None:** do not fall back to text yet. Follow "If you have no browser tool" in CLAUDE.md: tell the person how to turn browser control on, and wait. Only if they say no, open pages with `open "<url>"`, tell them what to click, and ask for a screenshot when you need to see the page.
+   1. **The desktop app's built-in browser.** Look for tools named `mcp__Claude_Browser__*`. If they are deferred, load them all with one ToolSearch call (query `mcp__Claude_Browser__`). If a `built-in-browser` skill is listed, read it first. Open new tabs with `preview_start`.
+   2. **Claude in Chrome.** Look for tools named `mcp__claude-in-chrome__*`. If you only see their names as deferred tools, load them with ToolSearch (query `claude-in-chrome`). If a `chrome-browser` skill is listed, read it first. Open new tabs; do not take over the person's existing tabs.
+   3. **Another browser tool,** such as `mcp__playwright__*`.
+   4. **gstack browse:** check `test -x ~/.claude/skills/gstack/browse/dist/browse`. Use it with `--headed` so the person can see and use the window. Start it in the background and keep it running; it closes when the command that started it ends.
+   5. **None:** do not fall back to text yet. Follow "If you have no browser tool" in CLAUDE.md: tell the person how to turn browser control on, and wait. Only if they say no, open pages with `open "<url>"`, tell them what to click, and ask for a screenshot when you need to see the page.
 
-   Save what you found: `bash scripts/state.sh set browser "<claude-in-chrome|playwright|gstack|none>"`.
+   Save what you found: `bash scripts/state.sh set browser "<built-in|claude-in-chrome|playwright|gstack|none>"`.
 
 3. Check the Mac's tools:
    ```
@@ -306,7 +307,7 @@ The kit pins the release in `kit.conf` (`WARMBLY_VERSION`, now `v0.8.3`, the rel
 1. Open the single-use claim page in the browser you control. The link is never printed.
    - Claude in Chrome: `bash scripts/claim-link.sh --app "Google Chrome"`
    - Default browser: `bash scripts/claim-link.sh`
-   - gstack browse, or a browser `open` cannot reach: have the person claim in their own browser now (`bash scripts/claim-link.sh`). In Phase 7 they sign in again inside your browser window.
+   - Built-in browser, gstack browse, or any browser `open` cannot reach: have the person claim in their own browser now (`bash scripts/claim-link.sh` opens their default browser). In Phase 7 they sign in again inside your browser. Do not copy the link into your browser yourself: it is a secret.
 
 2. **YOU DO THIS.**
 

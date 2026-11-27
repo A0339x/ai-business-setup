@@ -36,7 +36,7 @@ Prices as checked in November 2026. Claude shows you each price again before you
 
 ## What you do yourself
 
-Claude does the clicking in your Chrome browser. It stops and says "Your turn" only when it needs you to:
+Claude does the clicking in a browser for you. It stops and says "Your turn" only when it needs you to:
 - Choose a password, or sign in. Claude never types your passwords.
 - Type a two-step code, or solve a "not a robot" check.
 - Enter your card and click Pay. Claude takes you to the checkout page, and you check the total first.
@@ -51,8 +51,10 @@ You also choose the 10 sender names and the 2 sending domain names.
 - A credit or debit card.
 - A domain you already own, with access to its DNS settings. Warmbly's web address lives under it, for example `app.warmbly.yourcompany.com`. This domain is not used to send email.
 - Your phone, for sign-in codes.
-- Google Chrome with the Claude extension (Claude in Chrome): https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn. Sign in to it with the same Claude account you use in Claude Code. This lets Claude do the clicks for you. Without it, you do every click yourself while Claude tells you what to press.
-- A Claude Pro, Max, Ultra, Team or Enterprise plan. Claude in Chrome doesn't work with an API key.
+- A way for Claude to click for you. Pick one:
+  - **Easier:** the Claude desktop app. It has a browser built in, so there's nothing to install.
+  - **Or:** Claude Code in Terminal, plus the Claude extension for Google Chrome: https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn. Sign in to it with your Claude account. This needs a Claude Pro plan or higher, and doesn't work with an API key.
+- Without either one, you do every click yourself while Claude tells you what to press.
 
 ## What to know about sending
 
@@ -69,11 +71,19 @@ You also choose the 10 sender names and the 2 sending domain names.
 
 ## How to start
 
-1. Open Terminal in this folder.
-2. Start Claude Code with Chrome turned on: `claude --chrome`
-3. Say: "Read CLAUDE.md and set up Warmbly. Take control of my browser and do the clicks for me. I'll only handle sign-ins and payments."
+**In the Claude desktop app (easier):**
+1. Open the Claude desktop app and go to Claude Code.
+2. Choose this folder.
+3. Say: "Read CLAUDE.md and set up Warmbly. Take control of the browser and do the clicks for me. I'll only handle sign-ins and payments."
 
-When Chrome asks whether Claude may act on a website, allow it for this session.
+Keep the app's Browser pane showing when Claude says "Your turn". If it's hidden, press Cmd+Shift+B.
+
+**Or in Terminal, with Chrome:**
+1. Open Terminal in this folder.
+2. Run: `claude --chrome`
+3. Say the same sentence as above.
+
+If Claude asks whether it may act on a website, allow it for this session.
 
 ## For Claude
 

@@ -48,27 +48,40 @@ Write the way the Federal Plain Language Guidelines say:
 **You do the clicks. The person only signs in and pays.** Don't hand the person a list of clicks when you can make them yourself.
 
 Use the best browser tool you have. Check in this order (details in RUNBOOK.md, Phase 0):
-1. Claude in Chrome (tools named `mcp__claude-in-chrome__*`; they may need loading with ToolSearch). It works in the person's own Chrome, which suits this job: they sign in there themselves.
-2. Another browser tool, such as a Playwright browser tool (`mcp__playwright__*`) or a built-in browser.
-3. gstack `browse`, if `~/.claude/skills/gstack/browse/dist/browse` exists.
-4. None: follow "If you have no browser tool" below before you fall back to guiding by text.
+1. The Claude desktop app's built-in browser (tools named `mcp__Claude_Browser__*`). It is there when Claude Code runs inside the Claude desktop app, and needs nothing installed. If a `built-in-browser` skill is listed, read it first.
+2. Claude in Chrome (tools named `mcp__claude-in-chrome__*`). It works in the person's own Chrome, for Claude Code in Terminal.
+3. Another browser tool, such as a Playwright browser tool (`mcp__playwright__*`).
+4. gstack `browse`, if `~/.claude/skills/gstack/browse/dist/browse` exists.
+5. None: follow "If you have no browser tool" below before you fall back to guiding by text.
 
-Claude in Chrome asks before it acts on each new website. Tell the person to allow it for the session on Hetzner, Cloudflare (or their DNS provider), Zapmail and their Warmbly address. When it reaches a sign-in page or a CAPTCHA, it pauses for the person. That is expected.
+Browser tools may be listed as deferred. Load all of one kind in a single ToolSearch call with its name prefix, such as `mcp__Claude_Browser__`.
+
+**Built-in browser:** it has its own sign-ins, separate from the person's Chrome, so the person signs in to each site inside it. They can only act in it while the Browser pane is showing in the desktop app. Before each "Your turn", check that it is (`tabs_context` says so). If it's hidden, ask them to press Cmd+Shift+B or click the globe icon.
+
+Claude in Chrome and the built-in browser may ask before acting on a new website. Tell the person to allow it for the session on Hetzner, Cloudflare (or their DNS provider), Zapmail and their Warmbly address. When it reaches a sign-in page or a CAPTCHA, it pauses for the person. That is expected.
 
 Warmbly keeps its sign-in in the browser's local storage, not in cookies. You cannot borrow it from another browser. The person must sign in to Warmbly inside the browser you control.
 
 ### If you have no browser tool
 
-Before Phase 1, ask the person to turn on Claude in Chrome. It needs a Claude Pro, Max, Ultra, Team or Enterprise plan, with Claude Code signed in through `/login` (not an API key).
+Before Phase 1, offer the person two ways to let you click for them. The first is simpler.
 
 **Say:**
-> I can do all the clicking in your browser for you. Then you only handle sign-ins and payments. To turn that on:
+> I can do all the clicking in a browser for you. Then you only handle sign-ins and payments. Pick one:
+>
+> **Easier: use the Claude desktop app.** It has a browser built in, so there's nothing to install.
+> 1. Open the Claude desktop app and go to Claude Code.
+> 2. Choose this folder: <kit folder path>
+> 3. Say: "Read CLAUDE.md and set up Warmbly. Take control of the browser and do the clicks for me. I'll only handle sign-ins and payments."
+>
+> **Or stay in Terminal and use Chrome.**
 > 1. In Google Chrome, install the Claude extension: https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn
-> 2. Sign in to the extension with the same Claude account you use here.
-> 3. Type /chrome here and turn it on. Choose "Enable by default" so it stays on.
-> 4. Then say: "Take control of my browser and do the clicks for me. I'll only handle sign-ins and payments."
+> 2. Sign in to it with the same Claude account you use here.
+> 3. Type /chrome here and turn it on.
+>
+> Your progress is saved either way.
 
-If the browser tools still don't appear after `/chrome`, have the person quit and start again with `claude --chrome` in this folder. Your progress is saved, so the new session resumes. Then run Phase 0's browser check again and save the result.
+The Chrome route needs a Claude Pro, Max, Ultra, Team or Enterprise plan, with Claude Code signed in through `/login` (not an API key). If the browser tools still don't appear after `/chrome`, have the person quit and start again with `claude --chrome` in this folder. Your progress is saved, so the new session resumes. Then run Phase 0's browser check again and save the result.
 
 Only if the person says no to all of this: open each page with `open <url>` and guide them by text. Ask for a screenshot when you need to see the page.
 
