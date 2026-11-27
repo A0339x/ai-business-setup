@@ -55,7 +55,7 @@ From now on, read only the PART.md files of the parts they chose. **Never start,
 
 ### 3. Find out what they already use
 
-For each chosen part, open its PART.md and read its "If you already use…" section. Ask the questions it gives, all chosen parts in one message. For example:
+For each chosen part, open its PART.md and read its "If you already use…" section. Ask the questions it gives, all chosen parts in one message. Ask only about the chosen parts. For example, if they chose lead lists and the website check:
 
 > Before I set anything up, tell me what you already pay for, so you don't pay twice.
 > - For finding leads: do you use anything now, such as Apollo, ZoomInfo, Clay or HubSpot?
