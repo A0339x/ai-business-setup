@@ -5,7 +5,7 @@ This is the step-by-step procedure. Claude follows it phase by phase.
 How to read it:
 - **Goal** says what the phase produces.
 - **Steps** are what you (Claude) do. Commands run from the kit's root folder.
-- **YOU DO THIS** marks a step for the person. Open the page, say what to do in plain words, and wait for them to say they are done.
+- **YOU DO THIS** marks the part of a step only the person can do: sign in, type a password or two-step code, solve a CAPTCHA, enter card details, click the final Pay or Buy button, or click a button that reveals a secret (such as a new token). **You do every other click.** Drive the browser up to that point, hand over with "Your turn:" and the one thing to do, and wait for "done". Then take the browser back and carry on. Without a browser tool, see "If you have no browser tool" in CLAUDE.md.
 - **Say:** gives wording for the person. Adapt it, but keep it short and plain.
 - **Check** proves the phase worked. Do not move on until it passes. Then run `bash scripts/state.sh done <phase>`.
 - **Known problems** lists what went wrong in a real run of this setup, and the fix.
@@ -29,7 +29,7 @@ Throughout:
    1. **Claude in Chrome.** Look for tools named `mcp__claude-in-chrome__*`. If you only see their names as deferred tools, load them with ToolSearch (query `claude-in-chrome`). If a `chrome-browser` skill is listed, read it first. Open new tabs; do not take over the person's existing tabs.
    2. **Another browser tool,** such as `mcp__playwright__*` or a built-in browser tool.
    3. **gstack browse:** check `test -x ~/.claude/skills/gstack/browse/dist/browse`. Use it with `--headed` so the person can see and use the window. Start it in the background and keep it running; it closes when the command that started it ends.
-   4. **None:** open pages with `open "<url>"`. Tell the person what to click. Ask for a screenshot when you need to see the page.
+   4. **None:** do not fall back to text yet. Follow "If you have no browser tool" in CLAUDE.md: tell the person how to turn browser control on, and wait. Only if they say no, open pages with `open "<url>"`, tell them what to click, and ask for a screenshot when you need to see the page.
 
    Save what you found: `bash scripts/state.sh set browser "<claude-in-chrome|playwright|gstack|none>"`.
 
@@ -84,34 +84,32 @@ Throughout:
 
 1. **YOU DO THIS: create the Hetzner account.** Open https://accounts.hetzner.com/signUp.
 
+   Fill in the non-secret fields yourself (name, address, company) once the person gives them. The person chooses the password, confirms the email, enters the card and passes the identity check.
+
    **Say:**
-   > I opened Hetzner's sign-up page. Please:
-   > 1. Create your account and confirm your email.
-   > 2. Add a payment method.
-   > 3. Finish any identity check Hetzner asks for. It may want a photo ID, or a small prepayment.
-   > 4. I also suggest turning on two-step sign-in in your Hetzner account settings.
+   > Your turn at Hetzner:
+   > 1. Choose your password and finish sign-up. Confirm the email Hetzner sends you.
+   > 2. Enter your card when it asks for a payment method.
+   > 3. Finish any identity check. It may want a photo ID, or a small prepayment.
    >
-   > Tell me when you can see the Hetzner Cloud Console.
+   > I'll fill in everything else. Tell me "done" when you can see the Hetzner Cloud Console.
+
+   Afterward, offer to open the two-step sign-in settings for them.
 
    Hetzner's identity check can take from minutes to a day. If it is pending, stop here. Tell the person to come back when Hetzner approves the account. The state file lets the next session resume.
 
 2. **YOU DO THIS: create a project.** Open https://console.hetzner.com/projects.
 
-   **Say:**
-   > Click "New project", name it Warmbly, and open it. Tell me when you're in.
-
-   If the person is signed in and your browser tool can see the page, you may click "New project" yourself. It is free.
+   Click "New project" yourself, name it Warmbly, and open it. It is free. If the page asks the person to sign in, hand over for that only.
 
 3. **YOU DO THIS: create the API token.** In the project, open **Security**, then **API tokens**, then **Generate API token**. The page address looks like `https://console.hetzner.com/projects/<number>/security/tokens`.
 
+   Type the name `warmbly-kit` and choose "Read & Write" yourself. Stop before "Generate API token": the next page shows the token, and it must not reach your screenshots or this chat.
+
    **Say:**
-   > This creates a key that lets me set up the server for you.
-   > 1. Name it warmbly-kit.
-   > 2. Choose "Read & Write".
-   > 3. Click "Generate API token".
-   > 4. Click the copy button next to the token. Don't paste it anywhere.
+   > Your turn: click "Generate API token", then click the copy button next to the token. Don't paste it anywhere. Hetzner shows it only once.
    >
-   > Hetzner shows it only once. Tell me when you've copied it.
+   > Tell me "done" when you've copied it. I won't look at the page until you do.
 
 4. Save the token from the clipboard. It never appears in chat:
    ```
@@ -201,15 +199,12 @@ Option A, preferred: a token that can edit only this domain's DNS.
 
 1. **YOU DO THIS.** Open https://dash.cloudflare.com/profile/api-tokens.
 
+   Do these clicks yourself: "Create Token", then "Use template" next to "Edit zone DNS", then under "Zone Resources" choose Include, Specific zone, and <domain>, then "Continue to summary". Stop there: the next page shows the token.
+
    **Say:**
-   > This creates a key that can change DNS for this one domain only.
-   > 1. Click "Create Token".
-   > 2. Next to "Edit zone DNS", click "Use template".
-   > 3. Under "Zone Resources", choose Include, Specific zone, and pick <domain>.
-   > 4. Click "Continue to summary", then "Create Token".
-   > 5. Click the copy button. Don't paste it anywhere.
+   > This key can change DNS for this one domain only. Your turn: click "Create Token", then click the copy button. Don't paste it anywhere.
    >
-   > Tell me when you've copied it.
+   > Tell me "done" when you've copied it. I won't look at the page until you do.
 
 2. Save it and add the records:
    ```
@@ -223,7 +218,7 @@ Option B: if the person prefers no token, drive the Cloudflare dashboard. Open t
 
 ### If the DNS is somewhere else
 
-**YOU DO THIS.** Open the provider's DNS page. The person signs in. Then you (or they) add:
+**YOU DO THIS: sign in only.** Open the provider's DNS page. The person signs in. Then you add the records yourself:
 
 | Type | Name or host | Value | TTL |
 |---|---|---|---|
@@ -315,8 +310,10 @@ The kit pins the release in `kit.conf` (`WARMBLY_VERSION`, now `v0.8.3`, the rel
 
 2. **YOU DO THIS.**
 
+   Ask for their name and email, and type them in yourself. Leave the password fields empty.
+
    **Say:**
-   > Warmbly's setup page is open. Please enter your name, your email and a new password, then finish the form. Save the password in your password manager. Tell me when you see the Warmbly dashboard.
+   > Your turn: type a new password for Warmbly in both password boxes, then click the button to finish. Save the password in your password manager. Tell me "done" when you see the Warmbly dashboard.
 
 3. If a tour appears, the person may skip it.
 
@@ -357,21 +354,20 @@ Zapmail allows at most 5 mailboxes per domain. That is why there are 2 domains.
 2. **YOU DO THIS: create the Zapmail account.** Open https://app.zapmail.ai.
 
    **Say:**
-   > Please create your Zapmail account. Signing in with Google is fine. Then open the email Zapmail sends and click "Confirm Email Address". Tell me when you see the Zapmail dashboard.
+   > Your turn: create your Zapmail account. Signing in with Google is fine. Then open the email Zapmail sends and click "Confirm Email Address". I'll do everything after that. Tell me "done" when you see the Zapmail dashboard.
 
    An unconfirmed email can hold up mailbox setup later.
 
-3. **Wallet prompt.** Zapmail may ask you to prepay a wallet balance and suggest an amount such as $500. Say:
-   > Skip the wallet. Click "Skip to Domain Purchase" and leave "Auto Top Up" off. You pay only for the plan and the domains.
+3. **Wallet prompt.** Zapmail may ask you to prepay a wallet balance and suggest an amount such as $500. Skip it yourself: click "Skip to Domain Purchase" and leave "Auto Top Up" off. Tell the person you skipped it, because they pay only for the plan and the domains.
 
-4. **YOU DO THIS: buy the Starter plan.** Find the plan under onboarding or **Billing**. Check the page says Starter, $39 a month, 10 Google Workspace mailboxes. The person clicks to buy and pays.
+4. **YOU DO THIS: pay for the Starter plan.** Find the plan under onboarding or **Billing** and take it to the checkout page yourself. Check the page says Starter, $39 a month, 10 Google Workspace mailboxes. Then hand over: "Your turn: check the total, enter your card if asked, and click to pay."
 
 5. **Choose the 2 sending domains.** Ask the person for two names. Suggest names close to their own brand, and different from their main website domain, so a problem with sending never touches their main domain. Do not suggest names that imitate another company.
 
 6. **Buy the domains.** Open https://app.zapmail.ai/setup/domains/purchase (or **Domains**, then "Buy a New Domain"). Search each name and add the exact match to the cart.
    - Zapmail fills the registration contact form from the account. If a required field is empty (for example State), ask the person for the real value.
    - Zapmail may pre-select **ZapShield** ($3 a month per domain). Turn it off unless the person wants it.
-   - **YOU DO THIS:** the person checks the total and pays. Stripe may text a code.
+   - **YOU DO THIS: pay.** You take the cart to checkout. The person checks the total, enters the card if asked, and clicks to pay. Stripe may text them a code.
    - Repeat for the second domain if they were not in one cart.
 
    Save them:
@@ -441,7 +437,7 @@ Use Google app passwords over IMAP and SMTP. Do not use "Sign in with Google": o
 1. **YOU DO THIS: sign in to Warmbly in your browser.** Open `https://app.<host>`.
 
    **Say:**
-   > Please sign in to Warmbly in this window with the email and password you chose. Tell me when you see the dashboard.
+   > Your turn: sign in to Warmbly in this window with the email and password you chose. I'll do the rest of the import. Tell me "done" when you see the dashboard.
 
    Warmbly keeps the sign-in in this browser's storage. Signing in elsewhere does not help.
 

@@ -36,15 +36,14 @@ Prices as checked in November 2026. Claude shows you each price again before you
 
 ## What you do yourself
 
-Claude opens each page for you. You:
-- Create a Hetzner account, add a card, and pass Hetzner's identity check.
-- Create a Hetzner API token and click its Copy button.
-- Add 2 DNS records for your domain, or create a Cloudflare token so Claude can add them.
-- Create your Warmbly owner account and pick its password.
-- Create a Zapmail account and pay for the plan and the 2 domains.
-- Choose the 10 sender names and the 2 sending domain names.
-- Sign in to Warmbly in the browser Claude controls.
-- Type any password, card number, or two-step code. Claude never types these.
+Claude does the clicking in your Chrome browser. It stops and says "Your turn" only when it needs you to:
+- Choose a password, or sign in. Claude never types your passwords.
+- Type a two-step code, or solve a "not a robot" check.
+- Enter your card and click Pay. Claude takes you to the checkout page, and you check the total first.
+- Click the button that shows a new key, then its Copy button. You do this twice: once at Hetzner and once at Cloudflare. Claude doesn't look at the page until you say "done".
+- Pass Hetzner's identity check.
+
+You also choose the 10 sender names and the 2 sending domain names.
 
 ## What you need before you start
 
@@ -52,7 +51,8 @@ Claude opens each page for you. You:
 - A credit or debit card.
 - A domain you already own, with access to its DNS settings. Warmbly's web address lives under it, for example `app.warmbly.yourcompany.com`. This domain is not used to send email.
 - Your phone, for sign-in codes.
-- Google Chrome with the Claude in Chrome extension, if you have it. It lets Claude open pages in your own browser. Without it, Claude guides you step by step.
+- Google Chrome with the Claude extension (Claude in Chrome): https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn. Sign in to it with the same Claude account you use in Claude Code. This lets Claude do the clicks for you. Without it, you do every click yourself while Claude tells you what to press.
+- A Claude Pro, Max, Ultra, Team or Enterprise plan. Claude in Chrome doesn't work with an API key.
 
 ## What to know about sending
 
@@ -69,7 +69,11 @@ Claude opens each page for you. You:
 
 ## How to start
 
-Open Claude Code in this folder and say: "Read CLAUDE.md and set up Warmbly."
+1. Open Terminal in this folder.
+2. Start Claude Code with Chrome turned on: `claude --chrome`
+3. Say: "Read CLAUDE.md and set up Warmbly. Take control of my browser and do the clicks for me. I'll only handle sign-ins and payments."
+
+When Chrome asks whether Claude may act on a website, allow it for this session.
 
 ## For Claude
 
