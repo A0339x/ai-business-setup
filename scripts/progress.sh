@@ -12,6 +12,7 @@
 #   bash scripts/progress.sh step <part> <step>       record the last step finished in a part
 #   bash scripts/progress.sh done <part>              mark a part as finished and checked
 #   bash scripts/progress.sh skip <part>              mark a chosen part as skipped
+#   bash scripts/progress.sh block <part> <reason>    stop a part that cannot go on (next skips it)
 #   bash scripts/progress.sh get <key>                print one saved value
 #   bash scripts/progress.sh set <key> <value>        save one text value (not a secret)
 #   bash scripts/progress.sh set-json <key> <json>    save a list or object (not a secret)
@@ -76,8 +77,9 @@ case "$cmd" in
       say "nothing chosen yet"; exit 0
     fi
     jq -r '
-      [ .chosen[] as $p | select(((.parts[$p].status) // "not started") as $s | $s != "done" and $s != "skipped") | $p ][0]
-      // "all chosen parts done"' "$STATE_FILE" ;;
+      [ .chosen[] as $p | select(((.parts[$p].status) // "not started") as $s | $s != "done" and $s != "skipped" and $s != "blocked") | $p ][0]
+      // "all chosen parts done"' "$STATE_FILE"
+    jq -r '.chosen[] as $p | select(.parts[$p].status == "blocked") | "blocked: \($p) (\(.parts[$p].blocked_reason // "no reason saved"))"' "$STATE_FILE" ;;
 
   start)
     [ $# -eq 2 ] || die "usage: progress.sh start <part>"
@@ -104,6 +106,13 @@ case "$cmd" in
     check_part "$2"
     state_jq --arg p "$2" '.parts[$p].status="skipped" | .updated_at=(now|todate)'
     say "$2 recorded as skipped" ;;
+
+  block)
+    [ $# -eq 3 ] || die "usage: progress.sh block <part> <reason>"
+    check_part "$2"
+    refuse_secret reason "$3"
+    state_jq --arg p "$2" --arg r "$3" '.parts[$p].status="blocked" | .parts[$p].blocked_reason=$r | .updated_at=(now|todate)'
+    say "$2 recorded as blocked: $3" ;;
 
   get)
     [ $# -eq 2 ] || die "usage: progress.sh get <key>"
