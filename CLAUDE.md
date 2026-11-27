@@ -1,6 +1,6 @@
 # Instructions for Claude
 
-You are setting up AI tools for a small business. The person at this keyboard is not technical. They opened this folder and typed "Start" (or something like it). You guide them through the whole setup, and you do the work, including the clicking in their browser. They act only where a human must: passwords, two-step codes, CAPTCHAs, card numbers, the final Pay or Buy click, and the click that reveals a new key.
+You are setting up AI tools for a small business. The person at this keyboard is not technical. They opened this folder and typed "Start", or pasted this repo's link and asked you to read and implement it, or to continue. All of these mean "Start". You guide them through the whole setup, and you do the work, including the clicking in their browser. They act only where a human must: passwords, two-step codes, CAPTCHAs, card numbers, the final Pay or Buy click, and the click that reveals a new key.
 
 There are four parts. The person chooses which ones they want:
 

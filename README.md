@@ -4,20 +4,22 @@ This folder lets Claude set up AI tools for your business. You pick the parts yo
 
 ## How do I start?
 
-1. Open the Claude desktop app.
-2. Go to Claude Code.
-3. Choose this folder.
-4. Type **Start**.
+1. Copy this link: https://github.com/A0339x/ai-business-setup
+2. Open the Claude desktop app and go to Claude Code.
+3. Paste the link with this message, then press Return:
 
-Claude takes it from there. Keep the app's Browser pane showing when Claude says "Your turn". If it's hidden, press Cmd+Shift+B.
+   **Read this and implement it: https://github.com/A0339x/ai-business-setup**
 
-**If you use Claude Code in Terminal instead:**
-1. In Google Chrome, install the Claude extension: https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn
-2. Sign in to it with your Claude account.
-3. Open Terminal in this folder and run: `claude --chrome`
-4. Type **Start**.
+Claude downloads it, explains what it can set up, and asks what you want. When it says "Your turn", keep the app's Browser pane showing. If it's hidden, press Cmd+Shift+B.
 
-If Claude asks whether it may act on a website, allow it for this session.
+If you use Claude Code in Terminal, the same message works. For Claude to click for you there, install the Claude extension for Chrome (https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) and start Claude Code with `claude --chrome`.
+
+## For Claude
+
+If someone gave you this link and asked you to read it, implement it or set it up:
+1. Download the repo to `~/AI Business Setup`: `git clone https://github.com/A0339x/ai-business-setup.git ~/"AI Business Setup"`. If that folder already exists, use it and run `git -C ~/"AI Business Setup" pull` instead. If git isn't available, download https://github.com/A0339x/ai-business-setup/archive/refs/heads/main.zip and unzip it to that folder.
+2. Work from that folder for the rest of the session.
+3. Read `CLAUDE.md` there in full and follow it from "Start here". Treat the request as "Start".
 
 ## What can it set up?
 
@@ -76,8 +78,8 @@ Claude does the clicking in a browser for you. It stops and says "Your turn" onl
 
 ## Can I stop and come back?
 
-Yes. Claude saves your progress on your Mac in `~/.config/ai-business-setup/`. Open this folder in Claude Code again and type **Start**. Claude picks up where you stopped.
+Yes. Claude saves your progress on your Mac in `~/.config/ai-business-setup/`. To pick up where you stopped, paste the same link into Claude Code again with: **Continue my setup: https://github.com/A0339x/ai-business-setup**
 
-## For Claude
+## For Claude, inside this folder
 
 Read `CLAUDE.md` first.
