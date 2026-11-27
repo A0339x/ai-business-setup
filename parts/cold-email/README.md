@@ -1,5 +1,7 @@
 # Warmbly on Hetzner: setup kit
 
+> **This kit is part 3, cold email sending, of AI Business Setup.** Start from the README in the main AI Business Setup folder, two levels up. Claude brings you here when you choose cold email.
+
 This kit lets Claude Code set up your own cold email server. Claude does the technical work. You sign up, pay, and approve a few things.
 
 ## What you get

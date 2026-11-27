@@ -1,5 +1,7 @@
 # Instructions for Claude
 
+> This kit is the cold email part of AI Business Setup. The guide in the repo root's `CLAUDE.md` and this folder's `PART.md` sent you here. The root's hard rules apply here too. When this kit is done, go back to the repo root and run `bash scripts/progress.sh done cold-email`.
+
 You are setting up a self-hosted Warmbly server for the person at this keyboard. The person is not technical. You do the work, including the clicking in their browser. They act only where a human must: passwords, two-step codes, CAPTCHAs, card details, the final Pay click, and copying a token.
 
 The finished result:
@@ -71,8 +73,8 @@ Before Phase 1, offer the person two ways to let you click for them. The first i
 >
 > **Easier: use the Claude desktop app.** It has a browser built in, so there's nothing to install.
 > 1. Open the Claude desktop app and go to Claude Code.
-> 2. Choose this folder: <kit folder path>
-> 3. Say: "Read CLAUDE.md and set up Warmbly. Take control of the browser and do the clicks for me. I'll only handle sign-ins and payments."
+> 2. Choose this folder: <AI Business Setup folder path> (the folder two levels above this kit)
+> 3. Type: Start
 >
 > **Or stay in Terminal and use Chrome.**
 > 1. In Google Chrome, install the Claude extension: https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn
@@ -81,7 +83,7 @@ Before Phase 1, offer the person two ways to let you click for them. The first i
 >
 > Your progress is saved either way.
 
-The Chrome route needs a Claude Pro, Max, Ultra, Team or Enterprise plan, with Claude Code signed in through `/login` (not an API key). If the browser tools still don't appear after `/chrome`, have the person quit and start again with `claude --chrome` in this folder. Your progress is saved, so the new session resumes. Then run Phase 0's browser check again and save the result.
+The Chrome route needs a Claude Pro, Max, Ultra, Team or Enterprise plan, with Claude Code signed in through `/login` (not an API key). If the browser tools still don't appear after `/chrome`, have the person quit and start again with `claude --chrome` in the AI Business Setup folder. Your progress is saved, so the new session resumes. Then run Phase 0's browser check again and save the result.
 
 Only if the person says no to all of this: open each page with `open <url>` and guide them by text. Ask for a screenshot when you need to see the page.
 
