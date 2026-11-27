@@ -40,6 +40,7 @@ Ask: "Do you use any tool for your website's search results now? For example Sem
 | Yoast, Rank Math or All in One SEO (WordPress) | **Keep it.** Fixes for titles, descriptions and sitemaps go through its settings. If it has a field for Google or Bing verification codes, use that field. | The plugin already controls these settings. Changing them elsewhere causes conflicts. |
 | Google Search Console, already set up | **Keep it. Skip adding the site.** Claude checks that a sitemap is submitted and uses its data in the report. | It's already done. |
 | Bing Webmaster Tools, already set up | **Keep it. Skip that step.** | It's already done. |
+| WordPress | **Keep WordPress and its plugins.** Fixes go through the WordPress admin or the SEO plugin. Claude lists the plugins and automations first (step 8). The Netlify test copy of a WordPress site is a plain snapshot of its public pages (step 10). | WordPress plugins can change titles, sitemaps, emails and redirects. Knowing what's installed avoids conflicts. |
 | Shopify, Wix or Squarespace | **Keep its built-in SEO settings.** Fixes go there. Before connecting any app or agent to the store, list its automations (see step 8). | The platform controls titles, sitemaps and store emails. |
 | An agency or freelancer handling SEO | **Keep them.** Claude makes the report. Send it to them. Claude changes nothing on the site. | Two people changing one site cause conflicts. |
 | A tool that tracks AI search answers | **Keep it. Skip Treg's AI mention check.** | You already track it. |
@@ -84,13 +85,21 @@ From these, note:
 
 Skip this step if `TREG_TELEMETRY=0 treg` already shows an account and a balance. Put `TREG_TELEMETRY=0` in front of every `treg` command.
 
-1. Download the installer, read the whole file, then run it:
+1. Ask first. **Say:** "Can I install Treg's free tool on your Mac? It adds a command called treg, plus Treg's instructions for me, in your user folder. It doesn't need your Mac password." On yes, download the installer, read the whole file, then run it:
    ```
    curl -fsSL https://treg.to/install.sh -o "$TMPDIR/treg-install.sh"
    TREG_TELEMETRY=0 sh "$TMPDIR/treg-install.sh"
    ```
    It should only install the `treg` command and Treg's skill. If it does anything else, stop and tell the person. If it needs Python 3.12 or 3.13, ask to install uv (`brew install uv`, free) and run it again.
-2. **YOU DO THIS: sign in.** Run `TREG_TELEMETRY=0 treg login` in the background. It opens Treg's sign-in page. **Say:** "Your turn: sign in to Treg with Google, GitHub or your email. The first sign-in creates your account. Tell me "done" when the page says you're signed in." If it can't open from here, ask the person to type `! treg login` in this chat's message box.
+2. **Sign in with a Treg key,** so no sign-in code passes through the chat:
+   - Open https://treg.to in your browser. **YOU DO THIS: sign in.** **Say:** "Your turn: sign in to Treg with Google, GitHub or your email. The first sign-in creates your account. Tell me "done" when you see your Treg dashboard."
+   - Find the page for making an agent key or API key. Stop before the click that reveals it. **YOU DO THIS:** **Say:** "Your turn: click the button that creates the key, then its Copy button. Tell me "done". I won't look at the page until you do."
+   - Save it and sign in, without printing it:
+     ```
+     bash scripts/save-secret.sh treg-token
+     TREG_TELEMETRY=0 treg login --token "$(tr -d '\n' < ~/.config/ai-business-setup/secrets/treg-token)"
+     ```
+   - If there's no key page: **Say:** "Your turn: open the Terminal app (press Cmd+Space, type Terminal, press Return). Type `~/.local/bin/treg login --email <your email>` and press Return. Type the 6-digit code Treg emails you in the Terminal window, not here. Tell me "done" when it says you're signed in." Never ask for the code in chat.
 3. Check: `TREG_TELEMETRY=0 treg` shows the account and a balance. A new account has $1.00 of credit.
 4. Read Treg's skill: `~/.claude/skills/treg/SKILL.md`.
 
@@ -160,10 +169,12 @@ Skip if they already use Bing Webmaster Tools for this site.
 2. Choose the option to import sites from Google Search Console. **YOU DO THIS: sign in to Google and allow access.** Bing's blog says the import gives Bing access to the site and its sitemaps, not to your Search Console data.
 3. Pick this site and finish the import. It's free.
 
-### 8. Check automations and access
+### 8. Check plugins, automations and access
 
-Connecting an app or an agent to a website or store can switch things on. In one real setup, connecting an agent to a store turned on abandoned-cart emails nobody asked for.
+Connecting an app or an agent to a website or store can switch things on. In one real setup, connecting an agent to a store turned on abandoned-cart emails nobody asked for. This check applies to every site, not only stores.
 
+- **WordPress:** open the site's admin page (usually `<site>/wp-admin`). **YOU DO THIS: sign in.** **Say:** "Your turn: sign in to your WordPress admin. Tell me "done" when you see the dashboard." Then list the installed plugins and which are active, and note any that send email, add popups, change redirects or handle SEO. Change nothing.
+- **Other platforms:** sign in the same way, then list the apps or integrations and any automatic emails.
 - Before any app, plugin or agent is connected to the site or store, list its current automations, such as store emails, popups and redirects.
 - After connecting, list them again. Show the person anything new, and turn it off with their yes.
 - When a site asks what to allow, choose the smallest access that does the job, such as read-only. Tell the person what you chose.
@@ -182,6 +193,7 @@ Ask: "Do you want a test copy of your site at a separate address, so you can try
 If yes:
 1. Ask which address: a free `<name>.netlify.app` address, or a new domain. A new domain costs a yearly fee: find the price and quote it, then wait for a yes.
 2. Build the copy in `~/Documents/AI Business Setup/website-test-copy/`, from the person's own pages, with the approved fixes applied. Copy only content the person owns.
+   - **WordPress and other sites that run on a database:** the copy is a plain snapshot of the public pages, saved as HTML files. Forms, search, logins, comments and any shop won't work on it. **Say** this before you build: "The test copy will show your pages, but forms, search and the shop won't work on it. It's for looking at changes, not for customers."
 3. Keep the test copy out of search results, so it doesn't compete with the real site:
    - add `<meta name="robots" content="noindex">` to every page;
    - add a `_headers` file with `/*` and `X-Robots-Tag: noindex`.

@@ -25,9 +25,9 @@ You can choose one part, several, or all four.
 
 | Part | What you get |
 |---|---|
-| 1. Verified lead lists | A list of people who match your ideal customer, with work emails that were checked. You get a Google Sheet or a CSV file. |
+| 1. Verified lead lists | A list of people who match your ideal customer, with work emails that were checked. You get a Google Sheet or a CSV file (a simple spreadsheet file). |
 | 2. Daily operations bots | A team of Grok bots that writes your morning brief, sorts your inbox, drafts replies and keeps your to-do, orders and customer sheets. They only draft. You approve. |
-| 3. Cold email sending | Your own sending server with 10 new mailboxes that warm up before you send. If you already pay for a sending tool, Claude helps you use that instead. |
+| 3. Cold email sending | Your own sending server with 10 new mailboxes that warm up before you send. If you already pay for a sending tool, Claude checks its mailboxes and warmup with you and skips the new server. |
 | 4. Website and AI search check | A plain-words report on how your site shows up in Google and in AI tools such as ChatGPT, ranked by what to fix first. Then Claude adds your site to Google's and Bing's free site tools. |
 | Everything | All four, plus a link so Claude can read what your Grok bots know. |
 

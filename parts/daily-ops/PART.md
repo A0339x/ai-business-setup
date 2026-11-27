@@ -86,12 +86,13 @@ The template is private. Never copy it, or any text from it, into this repo. Rea
 1. Open a new Grok chat. Attach the zip from the `zip:` path. If your browser tool can't attach a file, see "File uploads" in CLAUDE.md.
 2. Type this message into Grok and send it. It contains no secrets:
    > I attached a template for an AI operations system. Read every file in it first. Then set me up from it. Ask me the questions in setup-questions.md one at a time, and save each answer. Then help me connect Google Drive, Gmail, Google Calendar and any other connectors I need. Then build the folder, sheets and sync document from the templates folder. Create the Chief of Staff bot and its routines. Then create the Inbox Triage, CRM & Orders, and Money & Bills bots. Drafts only: never send, buy, post or delete anything without my yes.
-3. **YOU DO THIS: answer Grok's setup questions.**
+3. **Pass Grok's setup questions to the person, and type their answers into Grok.** Grok asks one question at a time.
+   - Read each question in Grok. Ask the person the same question here in plain words. Explain it from `setup-questions.md` if it isn't clear.
+   - Type their answer into Grok and send it. If a question doesn't fit, type "skip".
+   - Never type a password, key or card number into Grok. If Grok asks for one, say no and tell the person.
 
-   **Say:**
-   > Your turn: Grok will now ask you setup questions one at a time, such as your business name, which inboxes to watch, and who never to contact. Type your answers in Grok. Skip any question that doesn't fit by saying "skip". Tell me "done" when Grok has asked them all, or tell me if you get stuck.
-
-   Stay ready. If the person asks you what a question means, explain it from `setup-questions.md`.
+   **Say** (before the first question):
+   > Grok will now ask setup questions one at a time, such as your business name, which inboxes to watch, and who never to contact. I'll ask you each one here and type your answers into Grok. Say "skip" for any that don't fit.
 
 ### 4. Connect Google Drive, Gmail and Calendar
 
@@ -115,7 +116,7 @@ If something is missing, ask Grok in the same chat to create it, and check again
 ### 6. Add business files and rules
 
 1. Ask: "Do you have files the bots should know, such as a price list, product sheet, FAQ or brand guide?" Upload the ones they choose to Grok. Never upload passwords, keys or card details.
-2. Ask the rule questions, and type the answers into Grok's chat for the Chief of Staff bot to save:
+2. Ask the rule questions here, and type the answers into Grok's chat for the Chief of Staff bot to save:
 
    **Say:**
    > A few rules for your bots:
@@ -124,7 +125,7 @@ If something is missing, ask Grok in the same chat to create it, and check again
    > 3. Are there topics they should never bring up?
    > 4. Is there anyone whose requests the bots should treat like yours, such as a partner or assistant?
 
-3. Say the anti-spam rules from CLAUDE.md (hard rule 6), unless `progress.sh get spam_rules_said` is already `yes`. The bots draft follow-up emails.
+3. Say the anti-spam rules from CLAUDE.md (hard rule 6), unless `progress.sh get spam_rules_said` is already `yes`. The bots draft follow-up emails that the person sends.
 
 ### 7. Run the Daily Health Check and a test brief
 

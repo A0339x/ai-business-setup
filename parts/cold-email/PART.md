@@ -65,16 +65,38 @@ Say the anti-spam rules from CLAUDE.md (hard rule 6), unless `progress.sh get sp
 
 ### 2a. Existing tool route
 
-1. Ask which domains they send from. Check each one's email records. These checks are read-only and free:
+Claude checks the tool with the person, reads only, and changes nothing.
+
+1. **Open their sending tool in the browser.** For Instantly, open https://app.instantly.ai. For another tool, open its sign-in page. **YOU DO THIS: sign in.** **Say:** "Your turn: sign in to <tool>. Tell me "done" when you see its dashboard."
+2. **Check the sending mailboxes.** Open the page that lists the email accounts the tool sends from. For each account, note:
+   - whether warmup is on;
+   - its health or deliverability score, if the tool shows one;
+   - any account marked with an error or paused.
+
+   In Instantly, the Email Accounts page has a Health Score column. Instantly's help pages aim for a score above 90%, show warmup status as a flame icon (grey means paused), and recommend at least 2 weeks of warmup before campaigns. New accounts show a score of 0 until warmup has run.
+3. **Check each sending domain's email records.** Ask which domains they send from, or read them from the account list. These checks are read-only and free:
    ```
    dig +short TXT <domain>            # look for v=spf1
    dig +short TXT _dmarc.<domain>     # look for v=DMARC1
    ```
-   DKIM records have a name set by the sending tool. If the tool's settings page shows it, check it with `dig +short TXT <selector>._domainkey.<domain>`.
-2. Tell the person in plain words what's missing, if anything. Don't change their DNS. If they want a fix, show the exact record and wait for a yes.
-3. If they made a lead list earlier in this setup, offer to import it into their tool as contacts. Ask first. Put the contacts in a paused or draft campaign only. Never start a campaign without their yes.
-4. Check: you reported the state of each domain's records, and the person knows what, if anything, to fix.
-5. Back at the repo root: `bash scripts/progress.sh done cold-email`.
+   DKIM records have a name set by the mailbox provider. If a settings page shows it, check it with `dig +short TXT <selector>._domainkey.<domain>`.
+4. **Report in plain words.**
+
+   **Say** (fill in the values):
+   > Here's how your sending looks in <tool>:
+   > - Mailboxes: <N>. Warmup on for <N>.
+   > - Health: <N> above 90%, <N> below. <names of any with errors>
+   > - Domain records: <SPF, DKIM and DMARC found or missing, per domain>
+   > - Ready for campaigns: <which mailboxes, and which need more warmup>
+   >
+   > I haven't changed anything.
+
+   If something needs fixing, say what and why. Don't change settings or DNS. If they want a fix, show the exact change and wait for a yes.
+5. **Offer to load a lead list,** only if they made one earlier in this setup. **Say:** "Do you want me to add your lead list to <tool> as a paused campaign? Nothing sends until you start it." On a yes, import the contacts into a new campaign and leave it paused or as a draft. Never start a campaign. The person starts it when they're ready.
+6. Check: you reported each mailbox and domain, and the person knows what, if anything, to fix.
+7. Back at the repo root: `bash scripts/progress.sh done cold-email`.
+
+Sources: Instantly Health Score and flame icon: https://help.instantly.ai/en/articles/13939939-warmup-health-score. Readiness (2 weeks of warmup, score above 90%): https://help.instantly.ai/en/articles/13938078-when-your-email-account-is-ready-for-campaigns (both checked 2026-11-26). For other tools, follow the goal of each step and describe what you see.
 
 ### 2b. Warmbly route
 
@@ -110,7 +132,7 @@ The kit's own README says to start by saying "Read CLAUDE.md and set up Warmbly"
 
 ## Check
 
-- **Existing tool route:** each sending domain's records were checked and reported.
+- **Existing tool route:** each mailbox's warmup and health, and each sending domain's records, were checked and reported.
 - **Warmbly route:** the kit's `bash scripts/verify.sh` prints `VERIFY_OK`, with 10 mailboxes active and warming across 2 domains.
 
 **Say** for the Warmbly route: use the kit's "Summary for the person" at the end of its RUNBOOK.md Phase 8. Add:

@@ -6,11 +6,11 @@ Claude reads this at the start and says the "Say" block below. It explains the f
 
 > Hi. I can set up four things for your business. You can pick one, several, or all of them.
 >
-> **1. Verified lead lists.** You tell me who your ideal customer is: their industry, company size, job title and location. I find people who match and check that each work email is real. You get a Google Sheet or a CSV file. It's pay per use through a service called Treg, usually a few cents per lead. New Treg accounts get $1.00 of credit, which covers a small test list.
+> **1. Verified lead lists.** You tell me who your ideal customer is: their industry, company size, job title and location. I find people who match and check that each work email is real. You get a Google Sheet, or a CSV file, which is a simple spreadsheet file that opens in Excel or Numbers. It's pay per use through a service called Treg, usually a few cents per lead. New Treg accounts get $1.00 of credit, which covers a small test list.
 >
-> **2. Daily operations bots.** A team of bots in Grok, the AI assistant from xAI. Each morning they write you a short brief. They sort your inbox and draft replies, keep a to-do sheet, an orders sheet and a customer list, and alert you when a new lead writes in. They only draft. Nothing goes out until you say yes. This needs a paid Grok plan.
+> **2. Daily operations bots.** A team of bots in Grok, the AI assistant from xAI. Each morning they write you a short brief. They sort your inbox and draft replies, keep a to-do sheet, an orders sheet and a customer list, and alert you when a new lead writes in. They only draft. Nothing goes out until you say yes. This needs a paid Grok plan, and a file called "AI Bot System Template.zip" from the person who shared this folder with you.
 >
-> **3. Cold email sending.** Your own sending server with 2 new domains and 10 new mailboxes. The mailboxes warm up for 3 to 4 weeks, so your emails land in inboxes instead of spam. It costs about $76 the first month, then about $50 a month. If you already pay for a sending tool such as Instantly or Smartlead, I'll help you use that instead.
+> **3. Cold email sending.** Your own sending server with 2 new domains and 10 new mailboxes. The mailboxes warm up for 3 to 4 weeks, so your emails land in inboxes instead of spam. It costs about $76 the first month, then about $50 a month. If you already pay for a sending tool such as Instantly or Smartlead, I'll check its mailboxes and warmup with you and skip the new server.
 >
 > **4. Website and AI search check.** I check how your website shows up in Google and in AI tools such as ChatGPT, and give you a plain-words list of what to fix first. Then, with your OK, I add your site to Google's and Bing's free site tools. The check usually costs less than $1.
 >
