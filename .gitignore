@@ -1,0 +1,17 @@
+# Secrets and personal files never belong in this repo. The setup keeps them in
+# ~/.config/ai-business-setup/ on the Mac. These patterns are a second line of defense.
+state.json
+*.bak
+secrets/
+.env
+.env.*
+*.key
+*.pem
+*token*
+*.csv
+*.xlsx
+*.zip
+*.log
+.DS_Store
+# The daily operations template stays private. Never add it here.
+template/
